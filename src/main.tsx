@@ -6,10 +6,16 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { AppRouter } from './router/AppRouter'; //  enrutador
 
+//  Importar el Provider
+import { CartProvider } from './context/CartProvider';
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    {/* Envolver todo con el CartProvider */}
+    <CartProvider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </CartProvider>
   </StrictMode>,
 )

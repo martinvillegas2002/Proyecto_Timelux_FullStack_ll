@@ -4,6 +4,9 @@ import { RelojProps } from '../interfaces/reloj.interfaces';
 import { getRelojById } from '../actions/relojes.actions';
 import { Button } from 'react-bootstrap';
 
+
+import { CartContext } from '../context/CartProvider';
+
 // Helper para formatear el precio
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('es-CL', {

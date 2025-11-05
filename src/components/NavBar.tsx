@@ -39,12 +39,11 @@ export const NavBar = ({onSearch}: Props) => {
             <Nav.Link href="/" active className="text-white">
               Inicio
             </Nav.Link>
-            <Nav.Link href="#" className="text-white">
-              Ofertas
+
+            <Nav.Link href="/nosotros" active className="text-white">
+              Nosotros
             </Nav.Link>
-
-
-
+           
             <NavDropdown 
               title={<span className="text-white">Categorías</span>} 
               id="basic-nav-dropdown"
@@ -67,7 +66,18 @@ export const NavBar = ({onSearch}: Props) => {
                 className="text-white"
               >
                 Smartwatches</NavDropdown.Item>
+
+                {/* Agregamos un divisor y un botón para resetear */}
+              <NavDropdown.Divider />
+              <NavDropdown.Item 
+                onClick={() => onSearch('')} // Llama con string vacío para mostrar todo
+                className="text-white" // Un color diferente
+              >
+                Mostrar Todos
+              </NavDropdown.Item>
+
             </NavDropdown>
+           
 
           </Nav>
 

@@ -50,10 +50,10 @@ export const RelojCard = ({ reloj }: Props) => {
 
           {/* Contenedor para alinear el precio y el botón al final */}
           <div className="mt-auto">
-            <h4 className="text-primary fw-bold">{formatCurrency(reloj.precio)}</h4>
+            <h4 className="text-white fw-bold">{formatCurrency(reloj.precio)}</h4>
 
         {/*Asignamos la funcion onClick que YA TIENE EL BOTON e integramos nuestra funcion*/}
-            <Button variant="primary" onClick={handleVerDetalle}>
+            <Button variant="outline-light" onClick={handleVerDetalle}>
               Ver Detalles
             </Button>
             
