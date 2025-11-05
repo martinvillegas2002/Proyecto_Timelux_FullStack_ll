@@ -6,6 +6,8 @@ import { RelojDetalle } from "../pages/RelojDetalle";
 
 import { NosotrosPage } from "../pages/NosotrosPage";
 
+import { CarritoPage } from "../pages/CarritoPage";
+
 export const AppRouter = () => {
     const routes = useRoutes([
         {
@@ -24,6 +26,9 @@ export const AppRouter = () => {
             element: <NosotrosPage />
 
         },
+      
+        { path: '/carrito',
+          element: <CarritoPage /> },
 
 
         {

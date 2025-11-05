@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { RelojProps } from '../interfaces/reloj.interfaces';
 import { getRelojById } from '../actions/relojes.actions';
@@ -24,7 +24,9 @@ export const RelojDetalle = () => {
   const [reloj, setReloj] = useState<RelojProps | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 3. Hook para cargar el reloj específico
+  const { addToCart } = useContext(CartContext);
+
+  //  Hook para cargar el reloj específico
   useEffect(() => {
     if (id) {
       const numericId = parseInt(id, 10); // Convertir el ID de la URL (string) a número
@@ -56,7 +58,15 @@ export const RelojDetalle = () => {
     }
   }, [id, navigate]); // Depende de 'id' y 'navigate'
 
-  // 4. Mostrar "Cargando..." mientras el estado `loading` sea true
+  //  Crear un handler para el botón
+  const handleAddToCart = () => {
+    if (reloj) { // Asegurarnos que el reloj está cargado
+      addToCart(reloj);
+      alert(`${reloj.nombre} ha sido añadido al carrito!`); // Feedback simple
+    }
+  }
+
+  //  Mostrar "Cargando..." mientras el estado `loading` sea true
   if (loading) {
     return (
       <div className="container-fluid min-vh-100 text-center text-white d-flex justify-content-center align-items-center"
@@ -105,7 +115,8 @@ export const RelojDetalle = () => {
               {reloj?.descripcionLarga}
             </p>
 
-            <Button variant="primary" size="lg" className="mt-4 w-100">
+            {/* 6. Asignar la nueva función al onClick */}
+            <Button variant="primary" size="lg" className="mt-4 w-100" onClick={handleAddToCart}>
               Agregar al Carrito
             </Button>
           </div>

@@ -3,6 +3,12 @@ import { Navbar, Nav, NavDropdown, Container, Form, Button } from 'react-bootstr
 
 //  Importar useState
 import { useState } from 'react'; 
+import { useContext } from 'react';
+
+
+import { CartContext } from '../context/CartProvider';
+
+import { NavLink } from 'react-router-dom';
 
 //Definir las props que esperamos (la función del padre)
 interface Props {
@@ -20,7 +26,11 @@ export const NavBar = ({onSearch}: Props) => {
     onSearch(query); // Llama a la función del padre con el texto actual
   }
 
+  //  Obtener 'cartItems' del contexto
+  const { cartItems } = useContext(CartContext);
 
+ //  Calcular el total de items
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
     // Usamos los componentes <Navbar>, <Nav>, etc.
@@ -81,7 +91,6 @@ export const NavBar = ({onSearch}: Props) => {
 
           </Nav>
 
-
           {/* Formulario de búsqueda */}
           <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
@@ -100,6 +109,17 @@ export const NavBar = ({onSearch}: Props) => {
               Buscar
             </Button>
           </Form>
+
+          {/* Añadir el ícono del Carrito (al final del todo) */}
+          <Nav>
+            <Nav.Link as={NavLink} to="/carrito" className="text-white">
+              🛒
+              {/* Mostrar el contador solo si hay items */}
+              {totalItems > 0 && (
+                <span className="badge bg-primary ms-1">{totalItems}</span>
+              )}
+            </Nav.Link>
+          </Nav>
 
         </Navbar.Collapse>
       </Container>
