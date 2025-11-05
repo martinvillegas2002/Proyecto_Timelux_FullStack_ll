@@ -42,15 +42,33 @@ export const NavBar = ({onSearch}: Props) => {
             <Nav.Link href="#" className="text-white">
               Ofertas
             </Nav.Link>
+
+
+
             <NavDropdown 
               title={<span className="text-white">Categorías</span>} 
               id="basic-nav-dropdown"
               menuVariant="dark" // Para que el dropdown también sea oscuro
             >
-              <NavDropdown.Item href="#" className="text-white">Relojes Análogos</NavDropdown.Item>
-              <NavDropdown.Item href="#" className="text-white">Relojes Digitales</NavDropdown.Item>
-              <NavDropdown.Item href="#" className="text-white">Smartwatches</NavDropdown.Item>
+              <NavDropdown.Item 
+                onClick={() => onSearch('Análogo')} //Le mandamos MANUALMENTE el nombre de la categoria 
+                className="text-white" 
+              >
+                Relojes Análogos</NavDropdown.Item>
+
+              <NavDropdown.Item 
+                onClick={() => onSearch('Digital') }
+                className="text-white"
+              >
+                Relojes Digitales</NavDropdown.Item>
+
+              <NavDropdown.Item 
+                onClick={() => onSearch('Smartwatch')}
+                className="text-white"
+              >
+                Smartwatches</NavDropdown.Item>
             </NavDropdown>
+
           </Nav>
 
 
