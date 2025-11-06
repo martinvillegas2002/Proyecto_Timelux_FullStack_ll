@@ -9,7 +9,7 @@ export const relojes: RelojProps[] = [
     descripcionCorta: 'Reloj análogo clásico con correa de acero inoxidable.',
     descripcionLarga: 'Un diseño atemporal que combina elegancia y durabilidad. Perfecto para cualquier ocasión, desde la oficina hasta un evento formal. Resistente al agua 30m.',
     precio: 149990,
-    imagen: 'classic-steel.jpg',
+    imagen: '/classic-steel.jpg',
     categoria: 'Análogo'
   },
   {
@@ -19,7 +19,7 @@ export const relojes: RelojProps[] = [
     descripcionCorta: 'Smartwatch con monitor de ritmo cardíaco y GPS.',
     descripcionLarga: 'Tu compañero ideal para el deporte y el día a día. Mide tus pasos, calorías, sueño y recibe notificaciones de tu celular. Batería de larga duración.',
     precio: 299990,
-    imagen: 'future-fit.jpg',
+    imagen: '/future-fit.jpg',
     categoria: 'Smartwatch'
   },
   {
@@ -29,7 +29,7 @@ export const relojes: RelojProps[] = [
     descripcionCorta: 'El icónico reloj digital de los 80 con cronómetro.',
     descripcionLarga: 'Vuelve a lo básico con este reloj digital confiable. Incluye luz de fondo, alarma diaria, cronómetro y calendario automático. Un clásico que nunca falla.',
     precio: 89990,
-    imagen: 'retro-digital.jpg',
+    imagen: '/retro-digital.jpg',
     categoria: 'Digital'
   },
   {
@@ -39,7 +39,7 @@ export const relojes: RelojProps[] = [
     descripcionCorta: 'Lujo y precisión en un reloj análogo dorado.',
     descripcionLarga: 'Fabricado con los más altos estándares suizos. Movimiento automático, cristal de zafiro y un acabado en oro de 18k que denota pura elegancia.',
     precio: 1499990,
-    imagen: 'executive-gold.jpg',
+    imagen: '/executive-gold.jpg',
     categoria: 'Análogo'
   }
 ];

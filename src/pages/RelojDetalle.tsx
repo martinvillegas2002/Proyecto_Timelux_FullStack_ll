@@ -72,8 +72,8 @@ export const RelojDetalle = () => {
       <div className="container-fluid min-vh-100 text-center text-white d-flex justify-content-center align-items-center"
            style={{ backgroundColor: '#212529' }}>
         <div>
-          <h2 className="text-primary">Cargando detalle del reloj...</h2>
-          <div className="spinner-border text-primary" role="status">
+          <h2 className="text-light">Cargando detalle del reloj...</h2>
+          <div className="spinner-border text-warning" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
@@ -88,7 +88,7 @@ export const RelojDetalle = () => {
       <div className="container text-white">
 
         {/* Botón para volver */}
-        <Button variant="outline-primary" onClick={() => navigate('/')} className="mb-4">
+        <Button variant="outline-light" onClick={() => navigate('/')} className="mb-4">
           ← Volver al Catálogo
         </Button>
 
@@ -109,7 +109,7 @@ export const RelojDetalle = () => {
             <h1 className="display-4 fw-bold">{reloj?.nombre}</h1>
             <p className="fs-5 text-muted">{reloj?.categoria}</p>
 
-            <h2 className="text-primary fw-bold mt-4">{formatCurrency(reloj?.precio ?? 0)}</h2>
+            <h2 className="text-warning fw-bold mt-4">{formatCurrency(reloj?.precio ?? 0)}</h2>
 
             <p className="fs-5 mt-4">
               {reloj?.descripcionLarga}

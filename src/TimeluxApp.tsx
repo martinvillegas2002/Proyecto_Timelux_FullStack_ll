@@ -111,12 +111,12 @@ export const TimeluxApp = () => {
                 <div className="text-center text-white">
                   <h2>Cargando relojes...</h2>
                   {/* Un "spinner" de carga de Bootstrap */}
-                  <div className="spinner-border text-primary" role="status">
+                  <div className="spinner-border text-warning" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 </div>
               )
-              // Ahora esto ya no dará error
+              
               : <RelojList relojes={relojes} />
           }
         </div>
