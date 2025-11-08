@@ -8,6 +8,8 @@ import { NosotrosPage } from "../pages/NosotrosPage";
 
 import { CarritoPage } from "../pages/CarritoPage";
 
+import { LoginPage } from "../pages/LoginPage";
+
 export const AppRouter = () => {
     const routes = useRoutes([
         {
@@ -30,6 +32,8 @@ export const AppRouter = () => {
         { path: '/carrito',
           element: <CarritoPage /> },
 
+        { path: '/login',
+          element: <LoginPage /> },
 
         {
             path: '*', // Ruta para "No encontrado"

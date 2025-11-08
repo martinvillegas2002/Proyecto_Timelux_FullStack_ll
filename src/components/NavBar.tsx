@@ -5,8 +5,9 @@ import { Navbar, Nav, NavDropdown, Container, Form, Button } from 'react-bootstr
 import { useState } from 'react'; 
 import { useContext } from 'react';
 
-
+//Los context 
 import { CartContext } from '../context/CartProvider';
+import { AuthContext } from '../context/AuthProvider';
 
 import { NavLink } from 'react-router-dom';
 
@@ -26,15 +27,14 @@ export const NavBar = ({onSearch}: Props) => {
     onSearch(query); // Llama a la función del padre con el texto actual
   }
 
-  //  Obtener 'cartItems' del contexto
+  //  Obtener cartItems y el user del contexto
   const { cartItems } = useContext(CartContext);
+  const { user, logout } = useContext(AuthContext);
 
  //  Calcular el total de items
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   return (
-    // Usamos los componentes <Navbar>, <Nav>, etc.
-    // Las props "bg" y "variant" le dan el estilo oscuro de Bootstrap.
     <Navbar expand="lg" bg="dark" variant="dark" className="border-bottom border-secondary">
       <Container fluid>
         <Navbar.Brand href="/" className="text-white fw-bold">
@@ -57,7 +57,7 @@ export const NavBar = ({onSearch}: Props) => {
             <NavDropdown 
               title={<span className="text-white">Categorías</span>} 
               id="basic-nav-dropdown"
-              menuVariant="dark" // Para que el dropdown también sea oscuro
+              menuVariant="dark" 
             >
               <NavDropdown.Item 
                 onClick={() => onSearch('Análogo')} //Le mandamos MANUALMENTE el nombre de la categoria 
@@ -110,7 +110,7 @@ export const NavBar = ({onSearch}: Props) => {
             </Button>
           </Form>
 
-          {/* Añadir el ícono del Carrito (al final del todo) */}
+          {/* Añadir el ícono del Carrito  */}
           <Nav>
             <Nav.Link as={NavLink} to="/carrito" className="text-white">
               🛒
@@ -121,6 +121,26 @@ export const NavBar = ({onSearch}: Props) => {
             </Nav.Link>
           </Nav>
 
+              {/* Login */}
+          <Nav className="ms-2">
+            {user ? (
+              // Si hay un usuario, mostrar su email y botón de logout
+              <NavDropdown 
+                title={<span className="text-warning">{user.email}</span>}
+                id="user-nav-dropdown"
+                menuVariant="dark"
+              >
+                <NavDropdown.Item onClick={logout}>
+                  Cerrar Sesión
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              // Si no hay usuario, mostrar botón de login
+              <Nav.Link as={NavLink} to="/login" className="text-white">
+                Login
+              </Nav.Link>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -9,10 +9,7 @@ interface CartContextType {
   removeFromCart: (relojId: number) => void;
   clearCart: () => void;
 }
-
-// 2. Crear el Contexto (con un valor por defecto)
-// La '!' es para decirle a TypeScript que confíe en nosotros, 
-// ya que el valor real vendrá del Provider.
+//  Crear el Contexto con un valor por defecto)
 export const CartContext = createContext<CartContextType>(null!);
 
 // 3. Definir las Props del Provider
@@ -20,13 +17,13 @@ interface Props {
   children: ReactNode; // 'children' es un tipo especial para componentes que envuelven a otros
 }
 
-// 4. Crear el Componente "Proveedor"
+//  Crear el Componente "Proveedor"
 export const CartProvider = ({ children }: Props) => {
 
-  // 5. Aquí vive el ESTADO GLOBAL del carrito
+  //  Aquí vive el ESTADO GLOBAL del carrito
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  // 6. Lógica para añadir al carrito
+  //  Lógica para añadir al carrito
   const addToCart = (reloj: RelojProps) => {
     setCartItems(prevItems => {
       // Buscar si el reloj ya está en el carrito
@@ -46,19 +43,19 @@ export const CartProvider = ({ children }: Props) => {
     });
   };
 
-  // 7. Lógica para eliminar del carrito
+  //  Lógica para eliminar del carrito
   const removeFromCart = (relojId: number) => {
     setCartItems(prevItems => {
       return prevItems.filter(item => item.id !== relojId);
     });
   };
 
-  // 8. Lógica para vaciar el carrito
+  //  Lógica para vaciar el carrito
   const clearCart = () => {
     setCartItems([]);
   };
 
-  // 9. Exponer el estado y las funciones a los componentes hijos
+  //  Exponer el estado y las funciones a los componentes hijos
   return (
     <CartContext.Provider value={{
       cartItems,

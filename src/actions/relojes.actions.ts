@@ -28,4 +28,12 @@ export const getRelojById = async (id: number): Promise<RelojProps | undefined> 
   });
 };
 
-/*Explicación (para el profe): "Profe, siguiendo la estructura del ejemplo, estoy creando mis actions en la carpeta src/actions. Estas funciones (getRelojes y getRelojById) simulan ser las llamadas a la API. Ambas son asíncronas (usan async y Promise) para imitar el comportamiento del mundo real, donde una petición de red toma tiempo en responder. En lugar de un fetch real, simplemente importan los datos del mock y los devuelven después de medio segundo."*/
+/*Explicación (para el profe): "Profe, siguiendo
+la estructura del ejemplo, estoy creando mis actions 
+en la carpeta src/actions. Estas funciones 
+(getRelojes y getRelojById) simulan ser las llamadas a la API.
+Ambas son asíncronas (usan async y Promise) para imitar el 
+comportamiento del mundo real, donde una petición de red toma 
+tiempo en responder. En lugar de un fetch real, simplemente 
+importan los datos del mock y los devuelven después de medio 
+segundo."*/
