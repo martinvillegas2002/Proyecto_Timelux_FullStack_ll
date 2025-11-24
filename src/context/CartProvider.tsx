@@ -2,14 +2,16 @@ import { createContext, useState, ReactNode } from 'react';
 import { CartItem } from '../interfaces/cart.interfaces';
 import { RelojProps } from '../interfaces/reloj.interfaces';
 
-// 1. Definir la forma del Contexto (qué datos y funciones expondrá)
+
+//  Definir la forma del Contexto qué datos y funciones expondrá
 interface CartContextType {
   cartItems: CartItem[];
   addToCart: (reloj: RelojProps) => void;
   removeFromCart: (relojId: number) => void;
   clearCart: () => void;
 }
-//  Crear el Contexto con un valor por defecto)
+
+//  Crear el Contexto con un valor por defecto
 export const CartContext = createContext<CartContextType>(null!);
 
 // 3. Definir las Props del Provider

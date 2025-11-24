@@ -1,50 +1,89 @@
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-//  Definimos la forma del usuario y del contexto
 interface User {
   email: string;
+  token: string;
 }
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string) => void;
+  login: (email: string, password: string) => Promise<void>;
+  register: (nombre: string, email: string, password: string) => Promise<void>; // <--- NUEVO
   logout: () => void;
 }
 
-//  Creamos el Contexto con un valor por defecto seguro
-export const AuthContext = createContext<AuthContextType>({
-  user: null,
-  login: () => {},
-  logout: () => {},
-});
+export const AuthContext = createContext<AuthContextType>(null!);
 
 interface Props {
   children: ReactNode;
 }
 
-//  Creamos el componente Proveedor
 export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
-  //  Lógica de Login (simulada)
-  const login = (email: string) => {
-    // En una app real, aquí harías una llamada a la API
-    // y verificarías la contraseña.
-    const newUser = { email };
-    setUser(newUser);
-    navigate('/'); // Redirigir al inicio después del login
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedEmail = localStorage.getItem('email');
+    if (storedToken && storedEmail) {
+      setUser({ email: storedEmail, token: storedToken });
+    }
+  }, []);
+
+  const login = async (email: string, password: string) => {
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) throw new Error('Error en la autenticación');
+
+      const data = await response.json();
+      const userData = { email, token: data.token };
+      setUser(userData);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('email', email);
+      navigate('/'); 
+    } catch (error) {
+      console.error("Login fallido:", error);
+      throw error;
+    }
   };
 
-  //  Lógica de Logout
+  // --- NUEVA FUNCIÓN DE REGISTRO ---
+  const register = async (nombre: string, email: string, password: string) => {
+    try {
+      const response = await fetch('http://localhost:8080/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, password, rol: 'CLIENTE' }), // Enviamos rol por defecto
+      });
+
+      if (!response.ok) throw new Error('Error en el registro');
+
+      // Si el registro es exitoso, redirigimos al login para que entre
+      alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
+      navigate('/login');
+      
+    } catch (error) {
+      console.error("Registro fallido:", error);
+      throw error;
+    }
+  };
+  // --------------------------------
+
   const logout = () => {
     setUser(null);
-    navigate('/login'); // Redirigir al login después del logout
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    navigate('/login');
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

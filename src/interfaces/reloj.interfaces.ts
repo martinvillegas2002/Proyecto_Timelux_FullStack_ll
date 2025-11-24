@@ -9,7 +9,3 @@ export interface RelojProps {
   categoria: 'Análogo' | 'Digital' | 'Smartwatch'; // Solo permitimos estos valores
 }
 
-/*Esto es como un 'contrato' que le dice a mi aplicación 
-qué campos y qué tipo de dato debe tener un objeto Reloj (como id numérico, nombre de tipo string, etc.). 
-Esto es clave en TypeScript para autocompletar código y, lo más importante,
-para prevenir errores al pasar datos entre componentes."*/

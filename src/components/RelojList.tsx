@@ -18,10 +18,3 @@ export const RelojList = ({ relojes }: Props) => {
   );
 }
 
-/*Explicación (para el profe): "Profe, este 
-es el componente RelojList. Este componente sí es
-'inteligente' en cuanto a renderizado. Recibe el 
-array completo de relojes como una prop. Luego, 
-usa la función .map() de JavaScript para iterar (recorrer) 
-esa lista. Por cada reloj en el array, renderiza un componente 
-RelojCard y le pasa el objeto reloj individual como prop.*/

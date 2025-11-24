@@ -4,7 +4,7 @@ import { NavBar } from '../components/NavBar';
 import { Container, Row, Col, Image, Button, Table, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-// Helper para formatear el precio
+// para formatear el precio
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -14,10 +14,10 @@ const formatCurrency = (value: number) => {
 
 export const CarritoPage = () => {
 
-  // 1. Consumimos TODO el contexto del carrito
+  //  Consumimos TODO el contexto del carrito
   const { cartItems, removeFromCart, clearCart } = useContext(CartContext);
 
-  // 2. Calculamos el total
+  //  Calculo el total
   const totalGeneral = cartItems.reduce((total, item) => 
     total + (item.precio * item.quantity), 0
   );
@@ -33,7 +33,7 @@ export const CarritoPage = () => {
           <Col>
             <h1 className="display-4 fw-bold text-light mb-4">Tu Carrito</h1>
 
-            {/* 3. Renderizado Condicional */}
+            {/*  Renderizado Condicional */}
             {cartItems.length === 0 ? (
 
               <Alert variant="info">
@@ -43,7 +43,7 @@ export const CarritoPage = () => {
 
             ) : (
 
-              // 4. Si hay items, mostramos la tabla
+              //  Si hay items, mostramos la tabla
               <>
                 <Table striped bordered hover variant="dark" responsive>
                   <thead>
@@ -78,7 +78,7 @@ export const CarritoPage = () => {
                   </tbody>
                 </Table>
 
-                {/* 5. Totales y Acciones */}
+                {/*  Totales y Acciones */}
                 <Row className="mt-4 justify-content-end">
                   <Col md={4} className="text-end">
                     <h3 className="text-light">Total: {formatCurrency(totalGeneral)}</h3>

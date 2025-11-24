@@ -37,7 +37,7 @@ export const NavBar = ({onSearch}: Props) => {
   return (
     <Navbar expand="lg" bg="dark" variant="dark" className="border-bottom border-secondary">
       <Container fluid>
-        <Navbar.Brand href="/" className="text-white fw-bold">
+        <Navbar.Brand as={NavLink} to="/" className="text-white fw-bold">
           ⌚ Timelux
         </Navbar.Brand>
         {/* Navbar.Toggle es el botón "hamburguesa" que aparece en móvil */}
@@ -46,11 +46,11 @@ export const NavBar = ({onSearch}: Props) => {
 
           {/* Navegación principal */}
           <Nav className="me-auto">
-            <Nav.Link href="/" active className="text-white">
+            <Nav.Link as={NavLink} to="/" active className="text-white">
               Inicio
             </Nav.Link>
 
-            <Nav.Link href="/nosotros" active className="text-white">
+            <Nav.Link as={NavLink} to="/nosotros" active className="text-white">
               Nosotros
             </Nav.Link>
            

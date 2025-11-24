@@ -1,6 +1,7 @@
 import { RelojProps } from '../interfaces/reloj.interfaces';
 
 // Exportamos un array de objetos RelojProps
+/*
 export const relojes: RelojProps[] = [
   {
     id: 1,
@@ -43,6 +44,7 @@ export const relojes: RelojProps[] = [
     categoria: 'Análogo'
   }
 ];
+*/
 
 /*"Profe, como aún no tenemos una API real,
 creé un archivo de 'mock data' (datos de muestra) en la carpeta src/data. Este archivo es simplemente un array de JavaScript que exporta una lista de relojes.

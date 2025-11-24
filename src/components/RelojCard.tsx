@@ -8,7 +8,7 @@ interface Props {
   reloj: RelojProps;
 }
 
-// Helper para formatear el precio (puedes moverlo a /helpers si quieres)
+// para formatear el precio 
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -64,8 +64,3 @@ export const RelojCard = ({ reloj }: Props) => {
   );
 }
 
-/*Explicación (para el profe): "Profe, este es mi componente 
-RelojCard. Es un componente 'tonto' o de presentación.
-Su única responsabilidad es recibir un objeto reloj 
-(que le llega a través de las props) y dibujarlo en 
-pantalla usando los componentes <Card> de React-Bootstrap.*/

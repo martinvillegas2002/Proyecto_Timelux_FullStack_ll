@@ -1,39 +1,62 @@
 import { relojes } from '../data/mock-relojes';
 import { RelojProps } from '../interfaces/reloj.interfaces';
 
-/**
- * Simula una llamada API para obtener todos los relojes.
- * Tarda 500ms en "responder".
- */
-export const getRelojes = async (): Promise<RelojProps[]> => {
+// URL directa al microservicio de catálogo (o al Gateway 8080 si te funcionó)
+const API_URL = 'http://localhost:8082/api/products';
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(relojes);
-    }, 500); // Simulamos un retraso de 500ms
-  });
+
+// Función para "traducir" de Backend (MySQL) a Frontend (React)
+const mapearReloj = (producto: any): RelojProps => {
+  return {
+    id: producto.id,
+    nombre: producto.nombre,
+    // Como no tenemos marca en la BD, inventamos una o la ponemos en el nombre
+    marca: "TimeLux Generic", 
+    // Usamos la misma descripción para ambas
+    descripcionCorta: producto.descripcion,
+    descripcionLarga: producto.descripcion,
+    precio: producto.precio,
+    // Aquí está el arreglo clave: imagenUrl -> imagen
+    imagen: producto.imagenUrl, 
+    // Extraemos solo el nombre de la categoría
+    // Forzamos el tipo para que TypeScript no se queje, o usa un string genérico
+    categoria: producto.categoria.nombre as any 
+  };
+};
+
+export const getRelojes = async (): Promise<RelojProps[]> => {
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) throw new Error('Error al cargar');
+    const data = await response.json();
+    
+    // ¡Aquí aplicamos la traducción a toda la lista!
+    return data.map(mapearReloj); 
+    
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 };
 
 /**
- * Simula una llamada API para obtener un solo reloj por su ID.
- * Tarda 500ms en "responder".
+ * Llamada API para obtener un solo reloj por su ID.
+
  */
 export const getRelojById = async (id: number): Promise<RelojProps | undefined> => {
+  try {
+    const response = await fetch(`${API_URL}/${id}`);
+    if (!response.ok) return undefined;
+    const data = await response.json();
+    
+    // ¡Traducimos el reloj individual!
+    return mapearReloj(data);
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const reloj = relojes.find(r => r.id === id);
-      resolve(reloj);
-    }, 500);
-  });
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
 };
 
-/*Explicación (para el profe): "Profe, siguiendo
-la estructura del ejemplo, estoy creando mis actions 
-en la carpeta src/actions. Estas funciones 
-(getRelojes y getRelojById) simulan ser las llamadas a la API.
-Ambas son asíncronas (usan async y Promise) para imitar el 
-comportamiento del mundo real, donde una petición de red toma 
-tiempo en responder. En lugar de un fetch real, simplemente 
-importan los datos del mock y los devuelven después de medio 
-segundo."*/
+
+/*NO DEPENDER DE FUNCIONM QUE AJUSTA BACKEND CON FRONTEND CAMBIar eso*/

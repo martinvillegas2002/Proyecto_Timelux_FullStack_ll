@@ -1,4 +1,4 @@
-//  componente
+
 import { NavBar } from './components/NavBar';
 
 //  hooks de React
@@ -8,7 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { getRelojes } from './actions/relojes.actions';
 import { RelojProps } from './interfaces/reloj.interfaces';
 
-//Importamos este que es el "inteligente" que rabaja con el "tonto" que sería components/RelojCard
+
 import { RelojList } from './components/RelojList';
 
 
@@ -69,7 +69,7 @@ export const TimeluxApp = () => {
   return (
     //  contenedor principal con el fondo
     <div 
-      className="container-fluid min-vh-100" // min-vh-100 (altura de 100%)
+      className="container-fluid min-vh-100" 
       style={{
         // Imagen
         backgroundImage: 'url("/background.jpg")', 
@@ -83,7 +83,7 @@ export const TimeluxApp = () => {
         {/* Pasamos la función de busqueda como prop al NavBar */}
         <NavBar onSearch={handleSearch}/>
 
-        {/* Este será el título de nuestra página principal */}
+        {/* Titulo */}
         <div className='text-center mt-5'>
             <h1 className='text-white display-4' 
                 style={{
@@ -95,15 +95,6 @@ export const TimeluxApp = () => {
             </h1>
         </div>
 
-       {/* Aquí renderizamos la lista de tarjetas */}
-       {/*"Profe, aquí estoy usando un renderizado condicional
-        basado en mi estado isLoading.
-
-        1- Si isLoading es true (lo cual ocurre al inicio y mientras useEffect está cargando los datos), muestro un spinner de carga de Bootstrap.
-
-        2- Cuando la carga termina (finally), setIsLoading(false) se ejecuta.
-
-        3- Esto provoca un re-renderizado, isLoading ahora es false, y el operador ternario muestra el componente <RelojList />."*/}
         <div className="row">
           {
             isLoading

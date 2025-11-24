@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 
 import { CartContext } from '../context/CartProvider';
 
-// Helper para formatear el precio
+// para formatear el precio
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('es-CL', {
     style: 'currency',
@@ -18,7 +18,7 @@ const formatCurrency = (value: number) => {
 export const RelojDetalle = () => {
   // Hooks de React Router
   const { id } = useParams(); // 1. Obtiene el 'id' de la URL
-  const navigate = useNavigate(); // 2. Para poder navegar (ej: botón "volver")
+  const navigate = useNavigate(); // 2. Para poder navegar --> Boton volver
 
   // Hooks de React
   const [reloj, setReloj] = useState<RelojProps | null>(null);
@@ -29,7 +29,7 @@ export const RelojDetalle = () => {
   //  Hook para cargar el reloj específico
   useEffect(() => {
     if (id) {
-      const numericId = parseInt(id, 10); // Convertir el ID de la URL (string) a número
+      const numericId = parseInt(id, 10); // Convertir el ID de la URL string a número
 
       if (isNaN(numericId)) {
         // Si el ID no es un número, volver al inicio
@@ -66,7 +66,7 @@ export const RelojDetalle = () => {
     }
   }
 
-  //  Mostrar "Cargando..." mientras el estado `loading` sea true
+  //  Mostrar Cargando mientras el estado `loading` sea true
   if (loading) {
     return (
       <div className="container-fluid min-vh-100 text-center text-white d-flex justify-content-center align-items-center"
@@ -126,14 +126,3 @@ export const RelojDetalle = () => {
   );
 };
 
-
-/*Explicación (para el profe): "Profe, este es el componente RelojDetalle,
- que funciona como una página completa.
-
-1- Usa el hook useParams de React Router para leer el id que viene en la URL.
-
-2- Usa el hook useNavigate para poder crear la función del botón "Volver".
-
-3- Al igual que en la página principal, usa useState para guardar el reloj (reloj) y el estado de carga (loading).
-
-4- Usa useEffect que depende del id. Cada vez que el id de la URL cambie, este hook se vuelve a ejecutar, llama a la action getRelojById con ese id, y actualiza el estado reloj con la información."*/

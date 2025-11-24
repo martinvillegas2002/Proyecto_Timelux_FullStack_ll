@@ -10,6 +10,8 @@ import { CarritoPage } from "../pages/CarritoPage";
 
 import { LoginPage } from "../pages/LoginPage";
 
+import { RegisterPage } from "../pages/RegisterPage";
+
 export const AppRouter = () => {
     const routes = useRoutes([
         {
@@ -29,16 +31,26 @@ export const AppRouter = () => {
 
         },
       
-        { path: '/carrito',
-          element: <CarritoPage /> },
+        {   path: '/carrito',
+            element: <CarritoPage /> },
 
-        { path: '/login',
-          element: <LoginPage /> },
+        {   path: '/login',
+            element: <LoginPage /> },
 
         {
             path: '*', // Ruta para "No encontrado"
             element: <div>Pagina no encontrada - 404</div>
-        }
+        },
+
+        { 
+            path: '/login',
+            element: <LoginPage /> },
+
+        { 
+            path: '/register',
+            element: <RegisterPage /> },
+
+
     ]);
 
     return routes;

@@ -29,12 +29,11 @@ export const NosotrosPage = () => {
             </p>
           </Col>
           <Col md={6}>
-            {/* Puedes cambiar esta imagen por una que te guste */}
             <Image 
               src="taller.jpg" 
               alt="Taller de relojería" 
-              fluid // Para que sea responsiva
-              rounded // Bordes redondeados
+              fluid 
+              rounded 
               className="shadow-lg"
             />
           </Col>
@@ -45,8 +44,4 @@ export const NosotrosPage = () => {
 }
 
 
-/*Explicación (para el profe): "Profe, aquí creé el componente NosotrosPage.
-Es un componente de 'presentación' simple. Reutilicé el componente <NavBar /> 
-en la parte superior para mantener la consistencia visual en toda la aplicación.
-El contenido es estático y está maquetado usando componentes de React-Bootstrap 
-como <Container>, <Row> y <Col> para que sea responsivo."*/
+
