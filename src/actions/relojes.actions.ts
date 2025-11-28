@@ -1,55 +1,65 @@
-import { relojes } from '../data/mock-relojes';
 import { RelojProps } from '../interfaces/reloj.interfaces';
 
-// URL directa al microservicio de catálogo (o al Gateway 8080 si te funcionó)
-const API_URL = 'http://localhost:8082/api/products';
+// ⚠️ IMPORTANTE: Cada vez que reinicies Ngrok, esta URL cambia.
+// Copia la nueva URL de tu terminal negra (la que dice "Forwarding") y pégala aquí.
+// Debe terminar en /api/products
+const API_URL = 'https://phyllocladous-emory-disapprovingly.ngrok-free.dev/api/products'; 
 
+// --- HEADERS PARA EVITAR LA PANTALLA DE ADVERTENCIA DE NGROK ---
+const ngrokHeaders = {
+  "ngrok-skip-browser-warning": "true",
+  "Content-Type": "application/json"
+};
 
-// Función para "traducir" de Backend (MySQL) a Frontend (React)
+// --- EL TRADUCTOR (ADAPTADOR) ---
+// Convierte los datos que vienen de Java (MySQL) al formato que espera React
 const mapearReloj = (producto: any): RelojProps => {
   return {
     id: producto.id,
     nombre: producto.nombre,
-    // Como no tenemos marca en la BD, inventamos una o la ponemos en el nombre
-    marca: "TimeLux Generic", 
-    // Usamos la misma descripción para ambas
+    marca: "Timelux", // Valor por defecto
     descripcionCorta: producto.descripcion,
     descripcionLarga: producto.descripcion,
     precio: producto.precio,
-    // Aquí está el arreglo clave: imagenUrl -> imagen
+    // Mapeo clave: imagenUrl (Backend) -> imagen (Frontend)
     imagen: producto.imagenUrl, 
-    // Extraemos solo el nombre de la categoría
-    // Forzamos el tipo para que TypeScript no se queje, o usa un string genérico
-    categoria: producto.categoria.nombre as any 
+    // Mapeo clave: Objeto categoria -> String nombre
+    categoria: producto.categoria ? producto.categoria.nombre : 'General' 
   };
 };
 
+// --- FUNCIÓN PARA OBTENER TODOS LOS RELOJES ---
 export const getRelojes = async (): Promise<RelojProps[]> => {
   try {
-    const response = await fetch(API_URL);
-    if (!response.ok) throw new Error('Error al cargar');
+    const response = await fetch(API_URL, { 
+      headers: ngrokHeaders // Enviamos el pase VIP
+    });
+    
+    if (!response.ok) throw new Error('Error al cargar relojes');
+    
     const data = await response.json();
     
-    // ¡Aquí aplicamos la traducción a toda la lista!
+    // Traducimos la lista completa
     return data.map(mapearReloj); 
     
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching relojes:", error);
     return [];
   }
 };
 
-/**
- * Llamada API para obtener un solo reloj por su ID.
-
- */
+// --- FUNCIÓN PARA OBTENER UN RELOJ POR ID ---
 export const getRelojById = async (id: number): Promise<RelojProps | undefined> => {
   try {
-    const response = await fetch(`${API_URL}/${id}`);
+    const response = await fetch(`${API_URL}/${id}`, { 
+      headers: ngrokHeaders // Enviamos el pase VIP
+    });
+    
     if (!response.ok) return undefined;
+    
     const data = await response.json();
     
-    // ¡Traducimos el reloj individual!
+    // Traducimos el reloj individual
     return mapearReloj(data);
 
   } catch (error) {
@@ -57,6 +67,3 @@ export const getRelojById = async (id: number): Promise<RelojProps | undefined> 
     return undefined;
   }
 };
-
-
-/*NO DEPENDER DE FUNCIONM QUE AJUSTA BACKEND CON FRONTEND CAMBIar eso*/
