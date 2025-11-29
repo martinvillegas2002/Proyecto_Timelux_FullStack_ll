@@ -23,6 +23,9 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
+// URL BASE LOCAL
+  const BASE_URL = 'http://localhost:8080/api/auth';
+
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedEmail = localStorage.getItem('email');
@@ -33,7 +36,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('https://phyllocladous-emory-disapprovingly.ngrok-free.dev/api/auth/login', {
+      const response = await fetch(`${BASE_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -56,7 +59,7 @@ export const AuthProvider = ({ children }: Props) => {
   // --- NUEVA FUNCIÓN DE REGISTRO ---
   const register = async (nombre: string, email: string, password: string) => {
     try {
-      const response = await fetch('https://phyllocladous-emory-disapprovingly.ngrok-free.dev/api/auth/register', {
+      const response = await fetch(`${BASE_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre, email, password, rol: 'CLIENTE' }), // Enviamos rol por defecto

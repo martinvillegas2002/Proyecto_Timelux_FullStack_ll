@@ -130,6 +130,13 @@ export const NavBar = ({onSearch}: Props) => {
                 id="user-nav-dropdown"
                 menuVariant="dark"
               >
+                {/* ESTO ES NUEVO: Solo el admin ve este botón */}
+                {user.email === 'admin@timelux.cl' && (
+                   <NavDropdown.Item as={NavLink} to="/admin">
+                      Panel Admin
+                   </NavDropdown.Item>
+                )}
+                
                 <NavDropdown.Item onClick={logout}>
                   Cerrar Sesión
                 </NavDropdown.Item>

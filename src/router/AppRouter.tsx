@@ -12,6 +12,8 @@ import { LoginPage } from "../pages/LoginPage";
 
 import { RegisterPage } from "../pages/RegisterPage";
 
+import { AdminPage } from "../pages/AdminPage";
+
 export const AppRouter = () => {
     const routes = useRoutes([
         {
@@ -49,6 +51,8 @@ export const AppRouter = () => {
         { 
             path: '/register',
             element: <RegisterPage /> },
+
+        { path: '/admin', element: <AdminPage /> }
 
 
     ]);
