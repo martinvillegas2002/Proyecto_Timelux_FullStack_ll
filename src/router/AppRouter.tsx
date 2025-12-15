@@ -14,6 +14,9 @@ import { RegisterPage } from "../pages/RegisterPage";
 
 import { AdminPage } from "../pages/AdminPage";
 
+import { AdminRoute } from "./AdminRoute";
+
+
 export const AppRouter = () => {
     const routes = useRoutes([
         {
@@ -52,7 +55,21 @@ export const AppRouter = () => {
             path: '/register',
             element: <RegisterPage /> },
 
-        { path: '/admin', element: <AdminPage /> }
+        { path: '/', element: <TimeluxApp /> },
+        // ... tus otras rutas ...
+        
+        // --- AQUÍ ESTÁ EL CAMBIO ---
+        { 
+          path: '/admin', 
+          element: (
+            <AdminRoute>
+              <AdminPage />
+            </AdminRoute>
+          ) 
+        },
+        // ---------------------------
+
+        { path: '*', element: <div>Pagina no encontrada - 404</div> }
 
 
     ]);
