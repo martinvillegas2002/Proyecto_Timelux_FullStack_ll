@@ -9,19 +9,16 @@ interface Props {
 export const AdminRoute = ({ children }: Props) => {
   const { user } = useContext(AuthContext);
 
-  // 1. Verificación: ¿Existe el usuario? (¿Está logueado?)
+  // 1. Si no hay usuario logueado, patada al Login
   if (!user) {
-    // Si no hay nadie logueado, mándalo al Login
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth/login" />; // Ojo con la ruta, ajusta si es solo /login
   }
 
-  // 2. Verificación: ¿Es el Administrador?
-  // Usamos la misma lógica que en tu NavBar
-  if (user.email !== 'admin@timelux.cl') {
-    // Si está logueado pero es un cliente normal, mándalo al Home
+  // 2. Si el usuario existe pero NO es admin (Ajusta el correo si usas otro)
+  if (user.email !== 'admin@timelux.cl' && user.email !== 'admin2@timelux.cl') {
     return <Navigate to="/" />;
   }
 
-  // 3. Éxito: Si cumple todo, déjalo ver la página (renderiza el hijo)
+  // 3. Si pasó todo, muestra la página
   return children;
 };
