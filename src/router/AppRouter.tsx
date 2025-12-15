@@ -56,9 +56,7 @@ export const AppRouter = () => {
             element: <RegisterPage /> },
 
         { path: '/', element: <TimeluxApp /> },
-        // ... tus otras rutas ...
         
-        // --- AQUÍ ESTÁ EL CAMBIO ---
         { 
           path: '/admin', 
           element: (
